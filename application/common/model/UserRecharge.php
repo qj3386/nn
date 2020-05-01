@@ -307,7 +307,7 @@ class UserRecharge extends Base
     //充值类型：1微信，2支付宝，3银行入款
     public function getPayTypeTextAttr($value, $data)
     {
-        $arr = array(0 => '未知', 1 => '微信扫码', 2 => '支付宝扫码', 3 => '银行入款', 4 => '支付宝转账');
+        $arr = array(0 => '未知', 1 => '微信扫码', 2 => '支付宝扫码', 3 => '银行入款', 4 => '支付宝转账', 5 => '其它');
         return $arr[$data['pay_type']];
     }
 

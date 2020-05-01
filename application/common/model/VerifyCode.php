@@ -75,7 +75,7 @@ class VerifyCode extends Base
         }
 
 		//短信发送，网建SMS短信通
-		$send_res = $this->send_smsbao($code, $mobile, $text);
+		$send_res = $this->send_smschinese($code, $mobile, $text);
 		if ($send_res !== true) {
 			return ReturnData::create(ReturnData::PARAMS_ERROR, null, $send_res);
 		}

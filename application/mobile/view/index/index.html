@@ -102,11 +102,12 @@ var swiper = new Swiper('.swiper-container', {
 <?php if ($project_type) { ?>
 <div class="com_moduleList" style="">
 <?php foreach ($project_type as $k=>$v) { ?>
+<?php if ($k == 3) { echo '<a href="javascript:;" style="display:block;"><img src="/images/mobile/shoucirenling.gif" style="display:block;width:94%;height:auto;margin:0 auto;border-radius:20px;"></a>'; } ?>
 <div class="com_module"><div class="cml_title"><span><font style="vertical-align: inherit;"><?php echo $v['name']; ?></font></span></div>
 <div class="cml_content" style="padding-top: 0px;">
 <?php if ($v['project_list']) { foreach ($v['project_list'] as $key=>$value) { ?>
-<div class="com_mdoule"><a href="{:url('project/detail')}?id=<?php echo $value['id']; ?>" class="db"><div class="c_m_img"><img src="<?php echo $value['cover']; ?>"> <div class="c_m_i_name"><span class="icon_label type_1"><font style="vertical-align: inherit;"><?php echo $value['breed']; ?></font></span> <span class="icon_label type_2"><font style="vertical-align: inherit;"><?php echo $value['gender']; ?></font></span>
-</div></div> <div class="c_m_content"><div class="c_m_label"><img src="/images/mobile/5e7b1ed8bedc6.png"></div> <div class="c_m_item flex"><div class="info flex_2"><div class="price"><font style="vertical-align: inherit;">¥<?php echo round($value['min_buy_money'] * $value['daily_interest'] / 100, 2); ?></font></div> <div class="text"><font style="vertical-align: inherit;" class="daoxu"><?php echo str_reversal('培育预计日利润'); ?></font></div></div> <div class="info flex_1 type_2"><div class="price"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><?php echo $value['term']; ?>天</font></font></div> <div class="text"><font style="vertical-align: inherit;">饲养期</font></div></div></div>
+<div class="com_mdoule"><a href="{:url('project/detail')}?id=<?php echo $value['id']; ?>" class="db"><div class="c_m_img"><img src="<?php echo $value['cover']; ?>"> <div class="c_m_i_name"><span class="icon_label type_1"><font style="vertical-align: inherit;"><?php echo $value['breed']; ?></font></span><span class="icon_label type_2"><font style="vertical-align: inherit;"><?php echo $value['gender']; ?></font></span><?php echo substr(str_replace("安格斯牛","",$value['title']), 0, 7); ?></div></div>
+<div class="c_m_content"><div class="c_m_label"><img src="/images/mobile/5e7b1ed8bedc6.png"></div> <div class="c_m_item flex"><div class="info flex_2"><div class="price"><font style="vertical-align: inherit;">¥<?php echo round($value['min_buy_money'] * $value['daily_interest'] / 100, 2); ?></font></div> <div class="text"><font style="vertical-align: inherit;" class="daoxu"><?php echo str_reversal('培育预计日利润'); ?></font></div></div> <div class="info flex_1 type_2"><div class="price"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><?php echo $value['term']; ?>天</font></font></div> <div class="text"><font style="vertical-align: inherit;">饲养期</font></div></div></div>
 <!-- <div class="progressBox1" style="margin-bottom:.05rem;margin-top:0;">
 	<div class="progress1" style="width:<?php echo round($value['sale'] * 100 / ($value['sale'] + $value['stock']), 2); ?>%;background:#ff6600;"></div>
 	<span class="progressNum1" style="font-size:12px;left:30px;">已认领<?php echo intval($value['sale']); ?>头,剩余<?php echo $value['stock']; ?>头</span>
@@ -117,7 +118,22 @@ var swiper = new Swiper('.swiper-container', {
 <!-- 回到顶部 -->
 <div class="go_top" id="go_top" style="display:none;display:block;width:24px;height:24px;padding:5px;border-radius:50%;position:fixed;bottom:120px;right:15px;border:1px solid #ccc;background:#f2f2f2;"><img src="/images/mobile/gotop.png" style="width:24px;height:24px;border-radius:50%;overflow:hidden;"></div>
 
-<?php if (sysconfig('CMS_HOME_ACTIVITY_STATUS') == 1) { ?>
+<div class="appdown" style="width:100%;height:40px;background-color:rgba(0, 0, 0, 0.5);position:fixed;bottom:52px;">
+	<div style="width:40px;height:40px;float:left;margin:0 5px;">
+		<img src="<?php echo sysconfig('CMS_LOGO_INDEXBOTTOM_IMAGE'); ?>" style="width:36px;height:36px;margin-top:2px;">
+	</div>
+	<div style="width:130px;line-height:15px;float:left;left:50px;color:#fff;margin:5px 0;font-size:12px;">
+		<?php echo sysconfig('CMS_WEBNAME'); ?>官网<br><?php echo sysconfig('CMS_SLOGAN'); ?>
+	</div>
+	<div style="width:40px;height:40px;float:right;" onclick="$('.appdown').hide();">
+		<a href="javascript:;" style="display:block;width:40px;line-height:40px;font-size:28px;cursor:pointer;color:#fff;text-align:center;">×</a>
+	</div>
+	<div style="width:90px;height:40px;float:right;">
+		<a href="<?php echo sysconfig('CMS_APP_DOWNLOAD_URL'); ?>" style="display:block;width:80px;height:28px;line-height:28px;margin:6px 5px;text-align:center;border-radius:5px;background-color:#FD5A21;color:#fff;font-size:14px;">下载APP</a>
+	</div>
+</div>
+
+<?php if (sysconfig('CMS_HOME_ACTIVITY_STATUS') == 1 && false) { ?>
 <!-- 活动弹窗start -->
 <div class="huodongbg" style="width:100%;height:100%;position:fixed;top: 0;left:0;background-color:rgba(0,0,0,0.35);z-index:9999999;">
 	<div style="width:300px;height:200px;position:fixed;top:0;left:0;right:0;bottom:0;margin:auto;background-color:#666;">
@@ -126,6 +142,18 @@ var swiper = new Swiper('.swiper-container', {
 	</div>
 </div>
 <!-- 活动弹窗end -->
+<?php } ?>
+
+<?php if (sysconfig('CMS_HOME_ACTIVITY_STATUS') == 1) { ?>
+<div class="active_window huodongbg"><div class="aw_bg"></div><a href="<?php echo sysconfig('CMS_HOME_ACTIVITY_URL'); ?>" class="aw_img"><img src="<?php echo sysconfig('CMS_HOME_ACTIVITY_IMAGE'); ?>"></a> <a onclick="huodong_hide()" href="javascript:;" class="aw_close"></a></div>
+<style>
+/* 首页广告弹窗 */
+.active_window .aw_bg{width: 100%; height: 100vh; position: fixed; top: 0; background-color: #000; opacity: 0.5; z-index: 9999991;}
+.active_window .aw_img{ max-width: 80%; min-width: 80%; max-height: 65vh; position: fixed; top: 30%; left: 10%; bottom: 50%; border-radius: 10px; display: flex; justify-content: center; align-items: center; z-index: 9999992;}
+.active_window .aw_img{ display: block; width: 100%; }
+.active_window .aw_img > img{ display: block; margin: auto; width: 100%; }
+.active_window .aw_close{ width: 40px; height: 40px; position: fixed; left: 50%; margin-left: -20px; bottom: 80px; z-index: 9999992; background-image: url('/images/mobile/icon_active_close.png'); background-size: 40px;}
+</style>
 <?php } ?>
 
 {include file="common/footer"/}

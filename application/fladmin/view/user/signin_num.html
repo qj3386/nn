@@ -10,6 +10,7 @@
 <th>用户名</th>
 <th>姓名</th>
 <th>签到时间</th>
+<th>注册时间</th>
 </tr></thead>
 <tbody>
 <?php if ($list) { foreach ($list as $row) { ?><tr>
@@ -17,6 +18,7 @@
 <td><?php if (!empty($row['head_img'])) { ?><img src="<?php echo $row['head_img']; ?>" style="width:24px;height:24px;" onerror="this.src='<?php echo http_host(); ?>/images/no_pic.jpg'"><?php } ?> <a href="{:url('edit')}?id=<?php echo $row["id"]; ?>"><?php if ($row['mobile']) { echo mobile_number_encrypt($row['mobile']); } else { echo $row['user_name']; } ?></a> <?php if ($row['parent_id'] > 0) { ?><small style="color:#f60;">有</small><?php } ?></td>
 <td><?php if ($row['true_name'] && $row['idcard']) { echo $row['true_name']; } else { echo '-'; } ?></td>
 <td><?php echo date('Y-m-d H:i', $row['signin_time']); ?></td>
+<td><?php echo date('Y-m-d', $row['add_time']); ?></td>
 </tr><?php } } ?>
 </tbody></table></div><!-- 表格结束 -->
 

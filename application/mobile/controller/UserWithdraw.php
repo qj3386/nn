@@ -78,11 +78,11 @@ class UserWithdraw extends Base
         if (Helper::isPostRequest()) {
 			$today_timestamp = strtotime(date('Y-m-d')); //今天日期时间戳
 			$current_timestamp = time();
-			//提现时间段8:00-24:00
-			if ($current_timestamp > ($today_timestamp + 8 * 3600) && $current_timestamp < ($today_timestamp + 24 * 3600)) {
+			//提现时间段8:00-23:00
+			if ($current_timestamp > ($today_timestamp + 8 * 3600) && $current_timestamp < ($today_timestamp + 23 * 3600)) {
 				
 			} else {
-				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, '提现时间8:00 ~ 24:00，请稍后再试'));
+				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, '提现时间8:00 ~ 23:00，请稍后再试'));
 			}
 			
             $data = input('post.');

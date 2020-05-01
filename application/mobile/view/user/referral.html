@@ -16,7 +16,9 @@ window.addEventListener('resize', function() {
 <link rel="stylesheet" href="/css/antui-all.css"/>
 <link rel="stylesheet" href="/css/mobile/style.css"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
 <script type="text/javascript" src="/js/qrcode.js"></script>
+<script type="text/javascript" src="/js/clipboard.min.js"></script>
 {include file="common/header"/}
 </head>
 <body ontouchstart="" style="">
@@ -28,6 +30,7 @@ window.addEventListener('resize', function() {
 </div>
 </div>
 
+<div><img src="/images/mobile/yaoqinghaoyou.jpg" style="width:100%;height:auto;"></div>
 <style>
 .referral{padding:15px;background-color:#fff;}
 .referral .qrcode img,.referral .qrcode canvas{width:100%;height:auto;display:block;}
@@ -36,12 +39,12 @@ window.addEventListener('resize', function() {
 </style>
 <div class="referral">
 	<div class="title" style="font-size:22px;color:#000000;text-align:center;line-height:1.5;">个人专属推荐二维码</div>
-	<div><div id="qrcode" class="qrcode" style="width:60%;margin:10px auto;"></div></div>
+	<div class="cp_bank_name"><div id="qrcode" class="qrcode" style="width:60%;margin:10px auto;"></div></div>
     <div class="title" style="font-size:14px;">扫一扫，轻松赚钱</div>
     <script type="text/javascript">
         //new QRCode(document.getElementById("qrcode"), "");  // 设置要生成二维码的链接
         var qrcode = new QRCode('qrcode', {
-            text: "<?php echo url('login/register').'?invite_code=' . $login_info['mobile']; ?>",
+            text: "<?php echo 'http://www.weidantong.com/mobile/login/register?invite_code=' . $login_info['id']; ?>",
             width: '300',
             height: '300',
             colorDark : '#000000',
@@ -54,6 +57,7 @@ window.addEventListener('resize', function() {
 <div class="referral" style="margin-top:10px;">
 	<div class="title" style="font-size:22px;color:#000000;text-align:center;line-height:1.5;">APP官方下载二维码</div>
 	<div><div id="qrcode2" class="qrcode" style="width:60%;margin:10px auto;"></div></div>
+	<div class="title" style="font-size:12px;">邀请好友注册时，推荐人记得填写您的会员手机号码</div>
     <script type="text/javascript">
         //new QRCode(document.getElementById("qrcode"), "");  // 设置要生成二维码的链接
         var qrcode = new QRCode('qrcode2', {
@@ -67,7 +71,7 @@ window.addEventListener('resize', function() {
     </script>
 </div>
 
-<div class="banner_tit">我的推荐记录</div>
+<div class="banner_tit">邀请列表</div>
 <?php if ($list) { ?>
 <div class="am-list am-list-twoline" style="padding-top:0;">
 <?php foreach($list as $k=>$v){ ?>
@@ -142,6 +146,22 @@ $(function(){
             }
         }
     });
+});
+//邀请好友URL
+var clipboard_bank_name = new Clipboard('.cp_bank_name', {
+	text: function() {
+		return '<?php echo 'http://www.weidantong.com/mobile/login/register?invite_code=' . $login_info['id']; ?>';
+	}
+});
+clipboard_bank_name.on('success', function(e) {
+	layer.open({
+		content: '邀请好友链接复制成功'
+		,skin: 'msg'
+		,time: 2 //2秒后自动关闭
+	});
+});
+clipboard_bank_name.on('error', function(e) {
+	console.log(e);
 });
 </script>
 
