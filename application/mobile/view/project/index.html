@@ -32,7 +32,7 @@ window.addEventListener('resize', function() {
 <?php if ($project_type) { ?>
 <div class="com_moduleList" style="">
 <?php foreach ($project_type as $k=>$v) { ?>
-<?php if ($k == 1) { echo '<a href="javascript:;" style="display:block;"><img src="/images/mobile/shoucirenling.gif" style="display:block;width:94%;height:auto;margin:0 auto;border-radius:20px;"></a>'; } ?>
+<?php if (!empty($v['litpic'])) { echo '<a href="javascript:;" style="display:block;"><img src="' . $v['litpic'] . '" style="display:block;width:94%;height:auto;margin:0 auto;border-radius:20px;"></a>'; } ?>
 <div class="com_module"><div class="cml_title"><span><font style="vertical-align: inherit;"><?php echo $v['name']; ?></font></span></div>
 <div class="cml_content" style="padding-top: 0px;">
 <?php if ($v['project_list']) { foreach ($v['project_list'] as $key=>$value) { ?>
