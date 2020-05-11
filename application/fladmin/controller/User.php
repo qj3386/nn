@@ -215,7 +215,7 @@ class User extends Base
 		//当天签到人数
 		$time = strtotime(date('Y-m-d')); //今天日期时间戳
 		$where = array('signin_time' => [['>=',$time],['<', ($time + 3600 * 24)]]);
-		$list = $this->getLogic()->getPaginate($where, 'signin_time desc', 'id,mobile,parent_id,head_img,true_name,idcard,signin_time,add_time');
+		$list = $this->getLogic()->getPaginate($where, 'add_time desc', 'id,mobile,parent_id,head_img,true_name,idcard,signin_time,add_time');
 
         $this->assign('page', $list->render());
         $this->assign('list', $list);

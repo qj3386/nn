@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title><?php echo sysconfig('CMS_WEBNAME'); ?></title>
+<meta name="robots" content="noindex,nofollow" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head><body ontouchstart="" style="background:#fefefe url('/images/mobile/muchang_bg.jpg') no-repeat;background-size:100% 100%;">
+
+<!-- <div class="fodder-list">
+	<div class="list-info" style="left:25px; top: 50px;"><img src="/images/mobile/icon_siliao.png" alt=""> <span>1g</span></div>
+	<div class="list-info" style="left:110px; top:25px;"><img src="/images/mobile/icon_siliao.png" alt=""> <span>2g</span></div>
+	<div class="list-info" style="left:185px; top:90px;"><img src="/images/mobile/icon_siliao.png" alt=""> <span>3g</span></div>
+	<div class="list-info" style="left:185px; top:200px;"><img src="/images/mobile/icon_siliao.png" alt=""> <span>4g</span></div>
+</div> -->
+
+<div class="bottom-rule">
+	<h2>游戏规则</h2>
+	<p>1、每日签到领取好礼</p>
+	<p>2、个人中心处可提现</p>
+</div>
+<div class="menu-list">
+	<a href="javascript:dosubmit();"><img src="/images/mobile/icon_lingqu.png"></a>
+	<a href="<?php echo url('user/referral'); ?>"><img src="/images/mobile/icon_recommend.png"></a>
+	<a href="<?php echo sysconfig('CMS_ONLINE_SERVICE_URL'); ?>"><img src="/images/mobile/icon_online.png"></a>
+</div>
+
+<style>
+.bottom-rule {position: absolute;bottom: 80px;left: 10px;color: #fff;}
+.bottom-rule h2 {font-size:16px;line-height:1.5;}
+.bottom-rule p {font-size:14px;height:25px;line-height:1.5;}
+.menu-list {width: 70px;position: absolute;top: 15%;right: 2%;bottom: 150px;}
+.menu-list img {width: 70px;height: 70px;margin: 10px 0;display: block;}
+.fodder-list {width: 100%;position: absolute;right: 0;top: 10%;-webkit-box-sizing: border-box;box-sizing: border-box;padding: 0 16px;}
+.fodder-list .list-info {position: absolute;width: 60px;text-align: center;}
+.fodder-list .list-info img {width:100%;}
+.fodder-list .list-info span {display: inline-block;position: absolute;top: 40%;left: 0;width: 40px;color: #ba4b50;text-shadow: 2px 2px 0 #fff;font-size:16px;font-weight: 600;}
+</style>
+
+<script>
+function dosubmit()
+{
+	<?php if (empty($login_info)) { ?>
+	//询问框
+	layer.open({
+		content: '请先登录'
+		,btn: ['确定', '关闭']
+		,yes: function(index){
+			window.location.href = '<?php echo url('login/index'); ?>';
+		}
+	});
+	return false;
+	<?php } ?>
+	var url = '<?php echo url('user/lingjifen'); ?>';
+	$.post(url,{content:1},function(res)
+	{
+        //提示
+        layer.open({
+            content: res.msg
+            ,btn: '确定'
+        });
+	},'json');
+}
+</script>
+
+{include file="common/footer"/}
+<div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
+</body></html>

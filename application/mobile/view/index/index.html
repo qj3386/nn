@@ -23,7 +23,7 @@ window.addEventListener('resize', function() {
 {include file="common/header"/}
 </head><body ontouchstart="">
 
-<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
+<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a style="position:absolute;left:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('goods/index')}">商城</a><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
 
 <?php if ($slide_list) { ?>
 <!--顶部滚动广告栏-start-->
@@ -108,10 +108,10 @@ var swiper = new Swiper('.swiper-container', {
 <?php if ($v['project_list']) { foreach ($v['project_list'] as $key=>$value) { ?>
 <div class="com_mdoule"><a href="{:url('project/detail')}?id=<?php echo $value['id']; ?>" class="db"><div class="c_m_img"><img src="<?php echo $value['cover']; ?>"> <div class="c_m_i_name"><span class="icon_label type_1"><font style="vertical-align: inherit;"><?php echo $value['breed']; ?></font></span><span class="icon_label type_2"><font style="vertical-align: inherit;"><?php echo $value['gender']; ?></font></span><?php echo substr(str_replace("安格斯牛","",$value['title']), 0, 7); ?></div></div>
 <div class="c_m_content"><div class="c_m_label"><img src="/images/mobile/5e7b1ed8bedc6.png"></div> <div class="c_m_item flex"><div class="info flex_2"><div class="price"><font style="vertical-align: inherit;">¥<?php echo round($value['min_buy_money'] * $value['daily_interest'] / 100, 2); ?></font></div> <div class="text"><font style="vertical-align: inherit;" class="daoxu"><?php echo str_reversal('培育预计日利润'); ?></font></div></div> <div class="info flex_1 type_2"><div class="price"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><?php echo $value['term']; ?>天</font></font></div> <div class="text"><font style="vertical-align: inherit;">饲养期</font></div></div></div>
-<!-- <div class="progressBox1" style="margin-bottom:.05rem;margin-top:0;">
-	<div class="progress1" style="width:<?php echo round($value['sale'] * 100 / ($value['sale'] + $value['stock']), 2); ?>%;background:#ff6600;"></div>
-	<span class="progressNum1" style="font-size:12px;left:30px;">已认领<?php echo intval($value['sale']); ?>头,剩余<?php echo $value['stock']; ?>头</span>
-</div> -->
+<div class="progressBox1" style="margin-bottom:.05rem;margin-top:0;">
+	<div class="progress1" style="width:<?php echo $value['progress']; ?>%;background:#ff6600;"></div>
+	<span class="progressNum1" style="font-size:12px;left:30px;"><?php echo $value['progress']; ?></span>
+</div>
 <div class="c_m_btn"><font style="vertical-align: inherit;" class="daoxu"><?php echo str_reversal($value['min_buy_money'] . '元认领'); ?></font></div></div></a></div>
 <?php } } ?></div></div><?php } ?></div><?php } ?>
 

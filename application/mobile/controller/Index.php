@@ -35,6 +35,15 @@ class Index extends Common
      */
     public function index()
     {
+		//判断是否登录
+        $this->isLogin();
+		if ((!empty($this->login_info) && ($this->login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($this->login_info) && $this->login_info['is_licai'] == 1)) {
+			
+		} else {
+			header('Location: ' . url('goods/index'));
+			exit;
+		}
+		
         $uri = $_SERVER["REQUEST_URI"]; //获取当前url的参数
 
         //分享到首页，把推荐码invite_code存下来
@@ -43,7 +52,7 @@ class Index extends Common
         }
 
         //获取所有分类
-		$project_type = logic('ProjectType')->getAll(['delete_time'=>0], 'listorder asc', 'id,name');
+		$project_type = logic('ProjectType')->getAll(['delete_time'=>0], 'listorder asc', 'id,name,litpic');
 		if ($project_type) {
 			foreach ($project_type as $k => $v) {
 				$project_type[$k]['project_list'] = logic('Project')->getAll(['type_id'=>$v['id'], 'delete_time'=>0, 'status'=>0], 'listorder asc');
@@ -313,4 +322,10 @@ class Index extends Common
 		//读取文件并写入到输出缓冲
 		readfile($filename);
 	}
+
+	//牧场
+    public function muchang()
+    {
+        return $this->fetch();
+    }
 }

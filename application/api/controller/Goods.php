@@ -67,7 +67,7 @@ class Goods extends Common
                     $orderby = 'price desc'; //价格从高到低
                     break;
                 case 4:
-                    $orderby = 'price asc'; //价格从低到高
+                    $orderby = 'sign_num asc'; //价格从低到高
                     break;
                 case 5:
                     $orderby = array('orderRaw','rand()'); //随机

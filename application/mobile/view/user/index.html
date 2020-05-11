@@ -30,7 +30,7 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">
                 <div class="am-list-title am-list-cell-twocolumn">
                     <div class="am-list-title" style="color:#fff;margin-bottom:0;"><a style="color:#fff;" href="<?php echo url('user/setting'); ?>"><?php if ($login_info['true_name']) { echo $login_info['true_name']; } elseif ($login_info['mobile']) { echo substr_replace($login_info['mobile'],'****',3,4); } else { echo $login_info['user_name']; } ?></a>
-					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><a href="{:url('page/detail')}?id=huiyuandengji" style="color:#FFCC00;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></a><?php } } else { ?><a style="color:#FFCC00;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
+					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><a href="javascript:;" style="color:#FFCC00;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></a><?php } } else { ?><a style="color:#FFCC00;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
                     <div class="am-list-right-brief"></div>
                 </div>
                 <div class="am-list-brief" style="color:#CCFFCC;">注册时间：<?php echo date('Y-m-d', $login_info['add_time']); ?></div>
@@ -39,8 +39,8 @@ window.addEventListener('resize', function() {
         </div>
     </div>
 </div>
-
-<div class="am-grid am-grid-col-3">
+<?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
+<div class="am-grid am-grid-col-3" style="margin-bottom:10px;">
   <a href="{:url('user_money/index')}" class="am-grid-item">
     <div class="am-grid-item-content">
       <div class="am-grid-item-title"><?php echo $login_info['money']; ?></div>
@@ -60,8 +60,8 @@ window.addEventListener('resize', function() {
     </div>
   </a>
 </div>
-
-<div class="am-grid am-grid-col-3" style="margin-top:10px;">
+<?php } ?>
+<div class="am-grid am-grid-col-3">
   <a href="{:url('user_withdraw/add')}" class="am-grid-item">
     <div class="am-grid-item-thumb" style="margin-bottom:8px;">
         <img src="/images/mobile/icon_qq6.png" />
@@ -78,6 +78,7 @@ window.addEventListener('resize', function() {
       <div class="am-grid-item-title">签到</div>
     </div>
   </a>
+  <?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
   <a href="{:url('user_recharge/add')}" class="am-grid-item">
     <div class="am-grid-item-thumb" style="margin-bottom:8px;">
         <img src="/images/mobile/icon_nav11.png" />
@@ -86,6 +87,7 @@ window.addEventListener('resize', function() {
       <div class="am-grid-item-title">充值</div>
     </div>
   </a>
+  <?php } ?>
 </div>
 
 <div class="am-list" style="padding-bottom:0;">
@@ -95,6 +97,7 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">资金管理</div>
             <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
         </a>
+		<?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
         <a href="<?php echo url('user_project/index'); ?>" class="am-list-item am-list-item-indent line-thumb">
             <div class="am-list-thumb"><img src="/images/mobile/user_invest.png" alt=""></div>
             <div class="am-list-content">领养记录</div>
@@ -115,9 +118,25 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">提现记录</div>
             <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
         </a>
+        <a href="<?php echo url('page/detail'); ?>?id=weixinchognzhi" class="am-list-item am-list-item-indent line-thumb">
+            <div class="am-list-thumb"><img src="/images/mobile/icon_pay_weixin.gif" alt=""></div>
+            <div class="am-list-content">微信支付方式</div>
+            <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+        </a>
+        <a href="<?php echo url('page/detail'); ?>?id=zhifubaochongzhi" class="am-list-item am-list-item-indent line-thumb">
+            <div class="am-list-thumb"><img src="/images/mobile/icon_pay_zhifubao.gif" alt=""></div>
+            <div class="am-list-content">支付宝支付方式</div>
+            <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+        </a>
+		<?php } ?>
         <a href="<?php echo url('user_message/index'); ?>" class="am-list-item am-list-item-indent line-thumb">
             <div class="am-list-thumb"><img src="/images/mobile/icon_message.png" alt=""></div>
             <div class="am-list-content">消息通知</div>
+            <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+        </a>
+        <a href="<?php echo url('user_exchange/index'); ?>" class="am-list-item am-list-item-indent line-thumb">
+            <div class="am-list-thumb"><img src="/images/mobile/icon_about2.png" alt=""></div>
+            <div class="am-list-content">兑换记录</div>
             <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
         </a>
     </div>

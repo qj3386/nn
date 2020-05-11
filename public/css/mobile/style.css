@@ -3,13 +3,6 @@
 .daoxu{direction:rtl;unicode-bidi:bidi-override;}
 
 /* 通用 */
-/* 底部导航 */
-.foohi{height:52px;}
-.footer{left:0px;bottom:0px;width:100%;position:fixed;z-index:99999;border-top:1px solid #efefef;background:#fafbfe;}
-.footer li{width:20%;float:left;padding:5px 0px;text-align:center;}.footer li a{display:block;}
-.footer li img{height:24px;}
-.footer li p{color:#888888;font-size:12px;line-height:16px;}
-.footer .on p{color:#1edeb4;}
 
 /* 顶部标题 */
 .classreturnbox{height:47px;}
