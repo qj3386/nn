@@ -11,9 +11,16 @@ class Goods extends Common
 	{
 		parent::_initialize();
     }
-    
+
     //列表
     public function index()
+	{
+		header('Location: ' . url('index/index'));
+		exit;
+    }
+
+	//列表
+    public function index2()
 	{
 		//参数
 		$pagesize = 10;
@@ -63,7 +70,7 @@ class Goods extends Common
         $this->assign($assign_data);
         return $this->fetch();
     }
-	
+
     //详情
     public function detail()
 	{

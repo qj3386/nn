@@ -35,15 +35,6 @@ class Index extends Common
      */
     public function index()
     {
-		//判断是否登录
-        $this->isLogin();
-		if ((!empty($this->login_info) && ($this->login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($this->login_info) && $this->login_info['is_licai'] == 1)) {
-			
-		} else {
-			header('Location: ' . url('goods/index'));
-			exit;
-		}
-		
         $uri = $_SERVER["REQUEST_URI"]; //获取当前url的参数
 
         //分享到首页，把推荐码invite_code存下来

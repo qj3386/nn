@@ -90,6 +90,14 @@ var swiper = new Swiper('.swiper-container', {
 
 <script>
 function duihuan() {
+	<?php if (empty($login_info)) { ?>
+		layer.open({
+			content: '请先登录'
+			,skin: 'msg'
+			,time: 2 //2秒后自动关闭
+		});
+        return false;
+	<?php } else { ?>
 	if (<?php echo $login_info['signin_num']; echo '<'; echo $post['sign_num']; ?>) {
 		layer.open({
 			content: '累计签到次数不足，暂不能兑换'
@@ -118,6 +126,7 @@ function duihuan() {
         return false;
 	}
 	window.location.href = '<?php echo sysconfig('CMS_ONLINE_SERVICE_URL'); ?>';
+	<?php } ?>
 }
 </script>
 <style>

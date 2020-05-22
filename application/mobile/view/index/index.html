@@ -23,7 +23,7 @@ window.addEventListener('resize', function() {
 {include file="common/header"/}
 </head><body ontouchstart="">
 
-<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a style="position:absolute;left:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('goods/index')}">商城</a><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
+<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a style="position:absolute;left:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('goods/index2')}">商城</a><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
 
 <?php if ($slide_list) { ?>
 <!--顶部滚动广告栏-start-->
@@ -120,6 +120,7 @@ var swiper = new Swiper('.swiper-container', {
 <!-- 回到顶部 -->
 <div class="go_top" id="go_top" style="display:none;display:block;width:24px;height:24px;padding:5px;border-radius:50%;position:fixed;bottom:120px;right:15px;border:1px solid #ccc;background:#f2f2f2;"><img src="/images/mobile/gotop.png" style="width:24px;height:24px;border-radius:50%;overflow:hidden;"></div>
 
+<?php if (false) { ?>
 <div class="appdown" style="width:100%;height:40px;background-color:rgba(0, 0, 0, 0.5);position:fixed;bottom:52px;">
 	<div style="width:40px;height:40px;float:left;margin:0 5px;">
 		<img src="<?php echo sysconfig('CMS_LOGO_INDEXBOTTOM_IMAGE'); ?>" style="width:36px;height:36px;margin-top:2px;">
@@ -134,6 +135,7 @@ var swiper = new Swiper('.swiper-container', {
 		<a href="<?php echo sysconfig('CMS_APP_DOWNLOAD_URL'); ?>" style="display:block;width:80px;height:28px;line-height:28px;margin:6px 5px;text-align:center;border-radius:5px;background-color:#FD5A21;color:#fff;font-size:14px;">下载APP</a>
 	</div>
 </div>
+<?php } ?>
 
 <?php if (sysconfig('CMS_HOME_ACTIVITY_STATUS') == 1 && false) { ?>
 <!-- 活动弹窗start -->
