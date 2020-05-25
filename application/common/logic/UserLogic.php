@@ -200,6 +200,7 @@ class UserLogic extends BaseLogic
      */
     public function login($data)
     {
+		$time = time();
         //验证数据
         $validate = new Validate([
             ['user_name', 'require|max:30', '账号不能为空|账号不能超过30个字符'],
@@ -227,6 +228,9 @@ class UserLogic extends BaseLogic
         }
 
 		if ($user['status'] == 2) {
+			if ($user['unlock_time'] > $time) {
+				return ReturnData::create(ReturnData::PARAMS_ERROR, null, '解锁时间：' . date('Y-m-d H:i', $user['unlock_time']));
+			}
             return ReturnData::create(ReturnData::PARAMS_ERROR, null, '该账户已被锁定，请联系人工客服处理');
         }
 		if ($user['status'] == 1) {
