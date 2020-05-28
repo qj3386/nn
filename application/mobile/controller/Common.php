@@ -22,8 +22,8 @@ class Common extends CommonController
         parent::_initialize();
 
 		if (!Helper::is_mobile_access()) {
-            //header('Location: /'); exit;
-			Helper::http404();
+            header('Location: /'); exit;
+			//Helper::http404();
         }
 
         if (strlen($_SERVER['REQUEST_URI']) > 100) {

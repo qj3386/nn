@@ -15,7 +15,6 @@ class Index extends Base
     //首页
     public function index()
     {
-		header('Location: ' . url('mobile/index/index'));exit;
 		if (Helper::is_mobile_access()) {
             //Helper::http404();
 			header('Location: ' . url('mobile/index/index'));exit;
