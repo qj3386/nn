@@ -35,6 +35,11 @@ class Index extends Common
      */
     public function index()
     {
+		if (!Helper::is_mobile_access()) {
+            header('Location: /'); exit;
+			//Helper::http404();
+        }
+
         $uri = $_SERVER["REQUEST_URI"]; //获取当前url的参数
 
         //分享到首页，把推荐码invite_code存下来
@@ -318,5 +323,15 @@ class Index extends Common
     public function muchang()
     {
         return $this->fetch();
+    }
+
+	/**
+	 * 快手-应用下载类广告转化数据API
+	 * https://www.weidantong.com/mobile/index/jiance?adtype=KUAISHOU&imeimd5=__IMEI2__&callback=__CALLBACK__&campaignid=__DID__&ip=__IP__&dropscene=__CSITE__
+	 */
+    public function jiance()
+    {
+		cache('adcallback', json_encode($_REQUEST));
+		//db('sysconfig')->where(['varname'=>'CMS_TEMP_TEST'])->update(['value' => json_encode($_REQUEST)]); exit;
     }
 }

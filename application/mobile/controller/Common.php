@@ -21,16 +21,11 @@ class Common extends CommonController
     {
         parent::_initialize();
 
-		if (!Helper::is_mobile_access()) {
-            header('Location: /'); exit;
-			//Helper::http404();
-        }
-
-        if (strlen($_SERVER['REQUEST_URI']) > 100) {
+        /* if (strlen($_SERVER['REQUEST_URI']) > 100) {
             header("HTTP/1.1 404 Not Found");
             header("Status: 404 Not Found");
             exit;
-        }
+        } */
 
         $this->login_info = session('mobile_user_info');
         $this->assign('login_info', $this->login_info);

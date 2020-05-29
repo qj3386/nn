@@ -171,6 +171,15 @@ class Login extends Common
 
             $res = ReturnData::create(ReturnData::SUCCESS, $user_id, '注册成功');
             $res['url'] = url('login/index');
+
+			if (cache('adcallback')) {
+				$adcallback = json_decode(cache('adcallback'), true);
+				$time_temp = time();
+				$time_temp = $time_temp * 1000;
+				file_get_contents($adcallback['callback'] . '&event_type=3&event_time=' . $time_temp);
+				cache('adcallback', NULL);
+			}
+
             Util::echo_json($res);
         }
 
