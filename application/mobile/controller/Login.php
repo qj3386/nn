@@ -174,10 +174,13 @@ class Login extends Common
 
 			if (cache('adcallback')) {
 				$adcallback = json_decode(cache('adcallback'), true);
-				$time_temp = time();
-				$time_temp = $time_temp * 1000;
-				file_get_contents($adcallback['callback'] . '&event_type=3&event_time=' . $time_temp);
-				cache('adcallback', NULL);
+				//$aaa = db('user_log')->where(['ip'=>request()->ip(), 'url'=>['like', '%KUAISHOU%']])->find();
+				//if ($aaa) {
+					$time_temp = time();
+					$time_temp = $time_temp * 1000;
+					file_get_contents($adcallback['callback'] . '&event_type=1&event_time=' . $time_temp);
+					cache('adcallback', NULL);
+				//}
 			}
 
             Util::echo_json($res);
