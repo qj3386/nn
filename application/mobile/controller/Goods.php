@@ -15,6 +15,8 @@ class Goods extends Common
     //列表
     public function index()
 	{
+		return $this->fetch();
+		header('Location: /'); exit;
 		header('Location: ' . url('index/index'));
 		exit;
     }

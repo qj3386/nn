@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title>商品列表</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head>
+<body ontouchstart="">
+
+<div class="classreturnbox">
+<div class="classreturn">
+    <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/mobile/icon_return3.png" alt="返回"></a></div>
+    <div class="ds-in-bl tit center"><span style="vertical-align:middle;">商品列表</span></div>
+</div>
+</div>
+
+<?php if (sysconfig('CMS_MALL_NOTICE')) { ?>
+<div class="am-notice" role="alert">
+    <div class="am-notice-content">
+        <marquee scrollamount="3" style="vertical-align:middle;"><?php echo sysconfig('CMS_MALL_NOTICE'); ?></marquee>
+    </div>
+</div>
+<?php } ?>
+
+<div class="floor">
+    <?php if($goods_list){ ?>
+    <ul class="ll-list" id="goods-list">
+    <?php foreach($goods_list as $k=>$v){ ?>
+	<li><a href="<?php echo url('goods/detail').'?id='.$v['id']; ?>">
+		<img alt="<?php echo $v['title']; ?>" src="<?php echo $v['litpic']; ?>">
+		<div class="ll-list-info">
+			<p class="ll-list-tit2"><?php echo $v['title']; ?></p>
+			<div class="ll-list-price"><span class="price" style="font-size:16px;">立即兑换</span></div>
+		</div>
+	</a></li>
+    <?php } ?>
+    </ul><?php }else{ ?>
+    <div style="text-align:center;line-height:40px;color:#999;">暂无记录</div><?php } ?>
+</div>
+
+<style>
+.ll-list{padding:15px 15px 0 15px;overflow:hidden;background-color:#ffffff;}
+.ll-list li{margin-bottom:15px;padding-bottom:10px;width:50%;float:left;}
+.ll-list li a{position:relative;display:block;margin-right:8px;overflow:hidden;}
+.ll-list li:nth-child(even) a{margin-right:0;margin-left:8px;}
+.ll-list li img{border-radius:4px;width:100%;height:46vw;}
+.ll-list .ll-list-tit{margin-top:8px;color:#333;font-size:14px;line-height:22px;white-space:nowrap;overflow:hidden;}
+.ll-list .ll-list-tit2{margin-top:8px;color:#333;font-size:14px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;height:40px;line-height:20px;overflow:hidden;}
+.ll-list .label{font-size:12px;position:absolute;color:#fff;background:#ff3333;display:inline-block;border-bottom-right-radius:5px;padding:0 4px;text-align:center;font-size:12px;}
+.ll-list .ll-list-click{color:#aaaaaa;font-size:12px;}
+.ll-list .ll-list-price{height:30px;line-height:32px;font-size:16px;color:#484848;}
+.ll-list .ll-list-price .price{font-size:18px;color:#ff3333;}
+.ll-list .ll-list-price .market-price{font-size:12px;color:#aaaaaa;text-decoration:line-through;}
+</style>
+
+<script>
+window.location.href = "<?php echo url('index/index'); ?>";
+
+$(function(){
+    var ajaxload  = false;
+    var maxpage   = false;
+    var startpage = 1;
+    var totalpage = <?php echo $totalpage; ?>;
+    
+    var tmp_url   = window.location.href;
+    msg = tmp_url.split("#");
+    tmp_url = msg[0];
+    
+    $(window).scroll(function ()
+    {
+        var listheight = $('#goods-list').outerHeight(); 
+        
+        if ($(document).scrollTop() + $(window).height() >= listheight)
+        {
+            if(startpage >= totalpage)
+            {
+                //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                return false;
+            }
+            
+            if(!ajaxload && !maxpage)
+            {
+                ajaxload = true;
+                //$("#submit_bt_one").html("努力加载中...");
+                var url = tmp_url;
+                var nextpage = startpage+1;
+                
+                $.get(url,{page_ajax:1,page:nextpage},function(res)
+                {
+                    if(res)
+                    {
+                        $('#goods-list').append(res);
+                        startpage++;
+                        
+                        if(startpage >= totalpage)
+                        {
+                            maxpage = true;
+                            //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                        }
+                        else
+                        {
+                            //$("#submit_bt_one").html("点击加载更多");
+                        }
+                        
+                        ajaxload = false;
+                    }
+                    else
+                    {
+                        //$("#submit_bt_one").html("请求失败，请稍候再试！");
+                        ajaxload = false;
+                    }
+                },'json');
+            }
+        }
+    });
+});
+</script>
+{include file="common/footer"/}
+</body></html>
