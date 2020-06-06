@@ -65,7 +65,37 @@ window.addEventListener('resize', function() {
     <?php if (false) { ?><div class="am-list-footer">如有疑问请联系客服</div><?php } ?>
 </div>
 
-<?php if (!empty($user_project_income_list)) { ?>
+<?php if ($post['dividend_mode'] == 10000) { ?>
+<style>
+.record_outer{background:#fff;margin-top:10px;margin-bottom:10px;font-size:14px;}
+.record_outer table{width:100%;border-collapse:collapse;}
+.record_outer table td,.record_outer table th{border: 1px solid #ebebeb;padding:6px 6px;text-align:center;}
+</style>
+<div class="record_outer">
+<table>
+	<tr>
+		<th colspan="3">认领收益支付明细</th>
+	</tr>
+	<tr>
+		<th>应支付收益时间</th>
+		<th>金额(元)</th>
+		<th>状态</th>
+	</tr>
+	<?php $time = time(); $expire_time = $post['add_time'] + $post['term'] * 86400; for ($x = 1; $x <= $post['term']; $x++) { ?>
+	<tr>
+		<td><?php $aaa = date('Y-m-d H:i', ($post['add_time'] + $x * 86400)); echo $aaa; ?></td>
+		<td>
+		<?php
+			$money = (round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), $x) * $post['money'], 2) - $post['money']);
+			$pre_money = (round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), ($x-1)) * $post['money'], 2) - $post['money']);
+			echo ($money - $pre_money);
+		?></td>
+		<?php if ($aaa >= $time) { echo '<td style="color:#04ba06;">已支付</td>'; } else { echo '<td style="color:red;">未支付</td>'; } ?>
+	</tr>
+	<?php } ?>
+</table>
+</div>
+<?php } elseif (!empty($user_project_income_list)) { ?>
 <style>
 .record_outer{background:#fff;margin-top:10px;margin-bottom:10px;font-size:14px;}
 .record_outer table{width:100%;border-collapse:collapse;}
