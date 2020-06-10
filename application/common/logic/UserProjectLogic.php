@@ -122,6 +122,9 @@ class UserProjectLogic extends BaseLogic
             return ReturnData::create(ReturnData::FAIL, null, '投资金额不能小于起投金额' . $project['min_buy_money']);
         } */
 		if ($project['max_buy_money'] != 0) {
+			if ($project['max_buy_money'] == 10000) {
+				return ReturnData::create(ReturnData::FAIL, null, '您暂不能领养');
+			}
             if ($data['money'] > $project['max_buy_money']) {
 				return ReturnData::create(ReturnData::FAIL, null, '已达最大认领份数' . $project['max_buy_money']);
 			}

@@ -83,14 +83,14 @@ window.addEventListener('resize', function() {
 	</tr>
 	<?php $time = time(); $expire_time = $post['add_time'] + $post['term'] * 86400; for ($x = 1; $x <= $post['term']; $x++) { ?>
 	<tr>
-		<td><?php $aaa = date('Y-m-d H:i', ($post['add_time'] + $x * 86400)); echo $aaa; ?></td>
+		<td><?php $qi_time = $post['add_time'] + $x * 86400; $aaa = date('Y-m-d H:i', $qi_time); echo $aaa; ?></td>
 		<td>
 		<?php
 			$money = (round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), $x) * $post['money'], 2) - $post['money']);
 			$pre_money = (round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), ($x-1)) * $post['money'], 2) - $post['money']);
 			echo ($money - $pre_money);
 		?></td>
-		<?php if ($aaa >= $time) { echo '<td style="color:#04ba06;">已支付</td>'; } else { echo '<td style="color:red;">未支付</td>'; } ?>
+		<?php if ($qi_time < $time) { echo '<td style="color:#04ba06;">已支付</td>'; } else { echo '<td style="color:red;">未支付</td>'; } ?>
 	</tr>
 	<?php } ?>
 </table>
