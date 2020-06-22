@@ -87,7 +87,7 @@ window.addEventListener('resize', function() {
         <div class="price">¥<?php $daily_earnings = round( ($post['min_buy_money'] * $post['daily_interest']) / 100, 2); echo $daily_earnings; ?></div>
         <div class="text daoxu"><?php echo str_reversal('饲养预计利润'); ?></div></div>
       <div class="p_tariff flex_1">
-        <div class="price"><?php echo $post['term']; ?>天</div>
+        <div class="price"><?php echo $post['term']; ?><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></div>
         <div class="text">饲养期</div></div>
     </div>
     <div class="p_module">
@@ -115,7 +115,7 @@ window.addEventListener('resize', function() {
             <div class="p_m_info">
               <span>性别</span><?php echo $post['gender']; ?></div>
             <div class="p_m_info">
-              <span><font class="daoxu"><?php echo str_reversal('预期总收益'); ?></font></span>¥<?php $total_revenue = 0; $total_revenue = round( $daily_earnings * $post['term'], 2 ); echo $total_revenue; ?></div>
+              <span><font class="daoxu"><?php echo str_reversal('预期总收益'); ?></font></span>¥<?php $total_revenue = 0; if ($post['dividend_mode'] != 10000) { ?><?php $total_revenue = round( $daily_earnings * $post['term'], 2 ); echo $total_revenue; ?><?php } else { ?><?php $total_revenue = (round(pow((1 + $post['daily_interest'] * 0.01), $post['term']) * $post['min_buy_money'], 2) - $post['min_buy_money']); echo $total_revenue; } ?></div>
             <a href="{:url('page/detail')}?id=niuzhibaodan" class="p_m_btn type_1" style="color:#333;">牛只保单</a>
 		  </div>
         </div>

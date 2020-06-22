@@ -531,6 +531,9 @@ class User extends Base
             if (input('refund_name', '') !== '') {
                 $data['refund_name'] = $this->test_input(input('refund_name'));
             }
+            if (input('is_auto_reinvest', '') !== '') {
+                $data['is_auto_reinvest'] = input('is_auto_reinvest');
+            }
 
             $res = $this->getLogic()->userInfoUpdate($data, $where);
             Util::echo_json($res);

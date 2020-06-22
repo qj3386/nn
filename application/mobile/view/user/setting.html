@@ -249,6 +249,50 @@ function update_sex(sex)
     setTimeout(function(){ window.location.reload(); }, 1000);
 }
 </script>
+	<a href="javascript:update_auto_reinvest_layer();" class="am-list-item">
+		<div class="am-list-content">自动复投</div>
+		<div class="am-list-extra"><?php if ($login_info['is_auto_reinvest'] == 1) { echo '是'; } else { echo '否'; } ?></div>
+		<div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+	</a>
+<script>
+function update_auto_reinvest_layer()
+{
+    //询问框
+    layer.open({
+        title: [
+          '请选择',
+          'background-color: #FF4351; color:#fff;'
+        ]
+        ,content: '<div style="padding:15px;"><a style="margin-bottom:10px;background-color:#1aad19;text-align:center;color:white;border:1px solid #179e16;" class="bottoma" onclick="layer.closeAll();" href="javascript:update_auto_reinvest(1);">是</a><a style="margin-bottom:10px;background-color:#ea5a3d;text-align:center;color:white;border:1px solid #dd2727;" class="bottoma" onclick="layer.closeAll();" href="javascript:update_auto_reinvest(0);">否</a></div>'
+    });
+}
+
+function update_auto_reinvest(sex)
+{
+    $.post('{:url("user/user_info_update")}',{is_auto_reinvest:sex},function(res)
+    {
+        if(res.code==0)
+        {
+            //提示
+            layer.open({
+                content: '修改成功'
+                ,skin: 'msg'
+                ,time: 2 //2秒后自动关闭
+            });
+        }
+        else
+        {
+            layer.open({
+                content: res.msg
+                ,skin: 'msg'
+                ,time: 2 //2秒后自动关闭
+            });
+        }
+    },'json');
+
+    setTimeout(function(){ window.location.reload(); }, 1000);
+}
+</script>
 	<a href="javascript:qrcode_layer();" class="am-list-item">
 		<div class="am-list-content">二维码名片</div>
 		<div class="am-list-extra"></div>
