@@ -43,7 +43,7 @@ window.addEventListener('resize', function() {
 <div class="am-list" style="padding-top:0;">
     <div class="am-list-item">
         <div class="am-list-content">委托饲养期限</div>
-        <div class="am-list-extra"><?php echo $post['term']; ?>天</div>
+        <div class="am-list-extra"><?php echo $post['term']; ?><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></div>
     </div>
     <div class="am-list-item">
         <div class="am-list-content">委托牧场</div>

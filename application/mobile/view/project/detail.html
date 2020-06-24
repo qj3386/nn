@@ -215,11 +215,11 @@ window.addEventListener('resize', function() {
           <div class="p_f_item">
             <p class="name">出栏卖出</p>
             <div class="round icon_line"></div>
-            <p class="time"><?php echo date('Y-m-d', (time() + $post['term'] * 3600 * 24)); ?></p></div>
+            <p class="time"><?php if ($post['dividend_mode'] == 10001) { echo date("Y-m-d", (time() + 3600 * $post['term'])); } else { echo date("Y-m-d", (time() + 3600 * 24 * $post['term'])); } ?></p></div>
           <div class="p_f_item">
             <p class="name"><font class="daoxu"><?php echo str_reversal('资金到账'); ?></font></p>
             <div class="round"></div>
-            <p class="time"><?php echo date('Y-m-d', (time() + $post['term'] * 3600 * 24)); ?></p></div>
+            <p class="time"><?php if ($post['dividend_mode'] == 10001) { echo date("Y-m-d", (time() + 3600 * $post['term'])); } else { echo date("Y-m-d", (time() + 3600 * 24 * $post['term'])); } ?></p></div>
         </div>
       </div>
     </div>
