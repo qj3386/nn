@@ -16,6 +16,7 @@ window.addEventListener('resize', function() {
 <link rel="stylesheet" href="/css/antui-all.css"/>
 <link rel="stylesheet" href="/css/mobile/style.css"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
 {include file="common/header"/}
@@ -92,7 +93,7 @@ window.addEventListener('resize', function() {
     </div>
     <div class="p_module">
       <div class="p_m_title">
-        <span><?php echo $post['title']; ?></span></div>
+        <span><?php echo $post['title']; ?></span><?php if ($post['sell_point']) { ?><font style="margin-right:8px;float:right;color:red;" onclick="aaa()">!</font><?php } ?></div>
       <img src="/images/mobile/5e7b1ed8bedc6.png" class="img" style="height: 0.24rem;">
       <div class="p_m_content">
         <div class="p_m_detail flex">
@@ -232,6 +233,20 @@ window.addEventListener('resize', function() {
         </div>
     </div>
 </div>
+
+<script>
+//询问框
+function aaa() {
+	layer.open({
+		content: '<?php echo $post['sell_point']; ?>'
+		,btn: ['确定', '取消']
+		,yes: function(index){
+			//location.reload();
+			layer.close(index);
+		}
+	});
+}
+</script>
 
 <div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
 </body></html>
